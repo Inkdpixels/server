@@ -38,53 +38,53 @@ done
 # Set fallbacks for command line arguments.
 #
 if [[ -z $PORT ]]; then
-	PORT="8000"
+  PORT="8000"
 fi
 
 #
 # Test whether a command exists.
 #
 command_exists() {
-	if [ `type -P $1` ]; then
-		return 0
-	fi
-	return 1
+  if [ `type -P $1` ]; then
+    return 0
+  fi
+  return 1
 }
 
 #
 # Log helper.
 #
 p_fail () {
-	printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
 
-	exit 1;
+  exit 1;
 }
 
 #
 # shortcut for ./flow server:run
 #
 run_flow_server() {
-	./flow server:run --port $PORT
+  ./flow server:run --port $PORT
 
-	exit 0;
+  exit 0;
 }
 
 #
 # shortcut for the interal php server.
 #
 run_php_server() {
-	php -S localhost:$PORT
+  php -S localhost:$PORT
 
-	exit 0;
+  exit 0;
 }
 
 #
 # shortcut for the http-server node package.
 #
 run_node_server() {
-	http-server -p $PORT
+  http-server -p $PORT
 
-	exit 0;
+  exit 0;
 }
 
 #
@@ -109,24 +109,24 @@ fi
 # cover the internal flow command if the file is found in the cwd.
 #
 if [ -f flow ]; then
- 	run_flow_server
+  run_flow_server
 
 #
 # Next up, try to run the internal PHP server (Only for PHP version =< 5.4.0)
 # ToDo: Check the current php version.
 #
 elif command_exists "php"; then
-	run_php_server
+  run_php_server
 
 #
 # Finally, node's http-server package.
 #
 elif command_exists "http-server"; then
-	run_node_server
+  run_node_server
 
 #
 # Nope!
 #
 else
-	p_fail "No server availabe, please install PHP v 5.4.0 or higher OR run `npm i -g http-server`."
+  p_fail "No server availabe, please install PHP v 5.4.0 or higher OR run `npm i -g http-server`."
 fi
