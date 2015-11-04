@@ -18,20 +18,20 @@
 #
 while [[ $# > 1 ]]
 do
-    key="$1"
+  key="$1"
 
-    case $key in
-        --port)
-        PORT="$2"
-        shift
-        ;;
-
-        --type)
-        TYPE="$2"
-        shift
-        ;;
-    esac
+  case $key in
+    --port)
+    PORT="$2"
     shift
+    ;;
+
+    --type)
+    TYPE="$2"
+    shift
+    ;;
+  esac
+  shift
 done
 
 #
@@ -91,17 +91,17 @@ run_node_server() {
 # If a certain type parameter was passed to the script, try to run it.
 #
 if [ -n "$TYPE" ]; then
-	  case "$TYPE" in
-	    flow)
-				run_flow_server ;;
-	    php)
-				run_php_server ;;
-			node)
-				run_node_server ;;
-			*)
-	  esac
+  case "$TYPE" in
+    flow)
+      run_flow_server ;;
+    php)
+      run_php_server ;;
+    node)
+      run_node_server ;;
+    *)
+  esac
 
-		exit 0;
+  exit 0;
 fi
 
 #
