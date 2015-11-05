@@ -107,7 +107,7 @@ run_any_server() {
     run_flow_server
 
   #
-  # Next up, try to run the internal PHP server (Only for PHP version =< 5.4.0)
+  # Next up, try to run the internal PHP server (Only for PHP version >= 5.4.0)
   # ToDo: Check the current php version.
   #
   elif command_exists "php"; then
@@ -123,7 +123,7 @@ run_any_server() {
   # Nope!
   #
   else
-    p_fail "No server available, please install PHP v <= 5.4.0 OR run `npm i -g http-server`."
+    p_fail "No server available, please install PHP v >= 5.4.0 OR run `npm i -g http-server`."
   fi
 }
 
