@@ -64,7 +64,11 @@ p_fail () {
 # shortcut for ./flow server:run
 #
 run_flow_server() {
-  ./flow server:run --port $PORT
+  if [ -f flow ]; then
+    ./flow server:run --port $PORT
+  else
+    p_fail "No local flow application found."
+  fi
 
   exit 0;
 }
@@ -73,7 +77,11 @@ run_flow_server() {
 # shortcut for the interal php server.
 #
 run_php_server() {
-  php -S localhost:$PORT
+  if command_exists "php"; then
+    php -S localhost:$PORT
+  else
+    p_fail "Seems like PHP isn't installed on your system, please make sure that the command is in your PATH."
+  fi
 
   exit 0;
 }
@@ -82,7 +90,11 @@ run_php_server() {
 # shortcut for the http-server node package.
 #
 run_node_server() {
-  http-server -p $PORT
+  if command_exists "http-server"; then
+    http-server -p $PORT
+  else
+    p_fail "Nodes `http-server` is not installed on your system, install it using `npm i -g http-server`."
+  fi
 
   exit 0;
 }
