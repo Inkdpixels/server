@@ -17,7 +17,7 @@ server
 
 Or, if you want to be specific and configure the command
 ```sh
- --type <type> --port <port>
+server --type <type> --port <port>
 ```
 
 ## Options
