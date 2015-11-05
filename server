@@ -99,6 +99,34 @@ run_node_server() {
   exit 0;
 }
 
+run_any_server() {
+  #
+  # First of, cover the internal flow command if the file is found in the cwd.
+  #
+  if [ -f flow ]; then
+    run_flow_server
+
+  #
+  # Next up, try to run the internal PHP server (Only for PHP version =< 5.4.0)
+  # ToDo: Check the current php version.
+  #
+  elif command_exists "php"; then
+    run_php_server
+
+  #
+  # Finally, node's http-server package.
+  #
+  elif command_exists "http-server"; then
+    run_node_server
+
+  #
+  # Nope!
+  #
+  else
+    p_fail "No server available, please install PHP v 5.4.0 or higher OR run `npm i -g http-server`."
+  fi
+}
+
 #
 # If a certain type parameter was passed to the script, try to run it.
 #
@@ -111,34 +139,14 @@ if [ -n "$TYPE" ]; then
     node)
       run_node_server ;;
     *)
+      run_any_server ;;
   esac
 
-  exit 0;
-fi
-
 #
-# If no type parameter was passed,
-# cover the internal flow command if the file is found in the cwd.
-#
-if [ -f flow ]; then
-  run_flow_server
-
-#
-# Next up, try to run the internal PHP server (Only for PHP version =< 5.4.0)
-# ToDo: Check the current php version.
-#
-elif command_exists "php"; then
-  run_php_server
-
-#
-# Finally, node's http-server package.
-#
-elif command_exists "http-server"; then
-  run_node_server
-
-#
-# Nope!
+# If no type parameter was passed, cycle through all options and run the first available server.
 #
 else
-  p_fail "No server availabe, please install PHP v 5.4.0 or higher OR run `npm i -g http-server`."
+  run_any_server
 fi
+
+exit 0;
