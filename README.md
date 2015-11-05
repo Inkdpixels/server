@@ -12,7 +12,12 @@ Because. No really, I am tired of executing different commands while switching b
 
 ## Usage
 ```sh
-server --type <type> --port <port>
+server
+```
+
+Or, if you want to be specific and configure the command
+```sh
+ --type <type> --port <port>
 ```
 
 ## Options
