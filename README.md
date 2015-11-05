@@ -7,6 +7,9 @@
 git clone https://github.com/Inkdpixels/server.git $HOME/.server-script && cd $HOME/.server-script && ./install && cd
 ```
 
+## Why?
+Because. No really, I am tired of executing different commands while switching between projects. I'm also lazy, and so are you! Join the Navy!
+
 ## Usage
 ```sh
 server --type <type> --port <port>
